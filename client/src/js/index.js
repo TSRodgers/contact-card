@@ -79,3 +79,10 @@ window.editCard = (e) => {
   // toggles submit button so it now updates
   submitBtnToUpdate = true;
 }
+
+if ('serviceWorker' in navigator) {
+  // use the window load event to keep the page load performant 
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js');
+  })
+};
