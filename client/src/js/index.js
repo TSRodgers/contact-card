@@ -15,11 +15,13 @@ import Bear from '../images/bear.png';
 import Dog from '../images/dog.png';
 
 // Import database
-import { initdb } from './database';
+import { initdb, getDb, postDb } from './database';
 
-// Add images on load
+
 window.addEventListener('load', function() {
   initdb();
+  
+  // Add images on load
   document.getElementById('logo').src = Logo;
   document.getElementById('bearThumbnail').src = Bear;
   document.getElementById('dogThumbnail').src = Dog;
