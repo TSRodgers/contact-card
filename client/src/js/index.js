@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Logo from '../images/logo.png';
 import Bear from '../images/bear.png';
 import Dog from '../images/dog.png';
-import { initdb, getDb, postDb, deleteDB } from './database';
+import { initdb, getDb, postDb, deleteDB, editDb } from './database';
 
 window.addEventListener('load', function() {
   initdb();
@@ -41,6 +41,7 @@ form.addEventListener('submit', event => {
   if (submitBtnToUpdate == false) {
     postDb(name, email, phone, profile);
   } else {
+    editDb(profileId, name, email, phone, profile);
     fetchCards();
     // Toggles the submit button back to POST functionality
     submitBtnToUpdate = false;
@@ -60,4 +61,21 @@ window.deleteCard = (e) => {
   deleteDB(id);
   // reload the DOM
   fetchCards();
+}
+
+window.editCard = (e) => {
+  // grabs id from button element attached to card and set a global variable
+  profileId = parseInt(e.dataset.id);
+  // grabs info to populate edit form
+  let editName = e.dataset.name;
+  let editEmail = e.dataset.email;
+  let editPhone = e.dataset.phone;
+
+  document.getElementById('name').value = editName;
+  document.getElementById('email').value = editEmail;
+  document.getElementById('phone').value = editPhone;
+
+  form.style.display = 'block';
+  // toggles submit button so it now updates
+  submitBtnToUpdate = true;
 }
